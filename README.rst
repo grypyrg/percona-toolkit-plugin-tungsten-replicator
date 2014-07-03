@@ -1,4 +1,4 @@
-Tungsten Replicator Plugin for Percona Toolkit
+Percona Toolkit Plugin For Tungsten Replicator 
 ==============================================
 
 A while back, I made some changes on the plugin interface for ``pt-online-schema-change`` which allows custom replication checks to be written. 
