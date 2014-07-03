@@ -138,7 +138,7 @@ The plugin also works with ``pt-online-schema-change``::
 	Successfully altered `app`.`large_table`.
 
 
-There was some slave lag caused by the 
+As you can see, there was some slave lag during the schema changes.
 
 
 
@@ -147,13 +147,13 @@ Binlog Format & ``pt-online-schema-change``
 
 ``pt-online-schema-change`` uses triggers in order to do the schema changes. Tungsten Replicator has some limitations with different binary log formats and triggers (https://code.google.com/p/tungsten-replicator/wiki/TRCAdministration#Triggers_and_Row_Replication).
 
-In Tungsten Replicator, ROW based binlog events will be converted to SQL statements, which causes triggers to be executed on the slave as well, this does not happen with traditional replication.
+In Tungsten Replicator, ``ROW`` based binlog events will be converted to SQL statements, which causes triggers to be executed on the slave as well, this does not happen with traditional replication.
 
 Different settings:
 
-- STATEMENT based binary logging works by default
-- ROW based binary logging works, the plugin recreates the triggers and uses the technique documented at https://code.google.com/p/tungsten-replicator/wiki/TRCAdministration#Triggers_and_Row_Replication
-- MIXED binary logging does not work, as there is currently no way to determine whether an event was written to the binary log in statement or row based format, so it's not possible to know if triggers should be run or not. The tool will exit and and error will be returned:: 
+- ``STATEMENT`` based binary logging works by default
+- ``ROW`` based binary logging works, the plugin recreates the triggers and uses the technique documented at https://code.google.com/p/tungsten-replicator/wiki/TRCAdministration#Triggers_and_Row_Replication
+- ``MIXED`` binary logging does not work, as there is currently no way to determine whether an event was written to the binary log in statement or row based format, so it's not possible to know if triggers should be run or not. The tool will exit and and error will be returned:: 
 
   	Error creating --plugin: The master it's binlog_format=MIXED, 
   	pt-online-schema change does not work well with 
