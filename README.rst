@@ -5,12 +5,12 @@ A while back, I made some changes on the plugin interface for ``pt-online-schema
 As I was adding this functionality, I also added the ``--plugin`` option to ``pt-table-checksum``.
 This was released in Percona Toolkit 2.2.8 (http://www.mysqlperformanceblog.com/2014/06/04/percona-toolkit-2-2-8-now-available/).
 
-With these additions, I spent some time writing a plugin that allows the Percona Toolkit tools to use Tungsten Replicator to check for slave lag.
+With these additions, I spent some time writing a plugin that allows the Percona Toolkit tools to use Tungsten Replicator to check for slave lag, you can find the code at https://github.com/grypyrg/percona-toolkit-plugin-tungsten-replicator
 
 Requirements
 ------------
 
-The plugin uses the perl JSON::XS module (perl-JSON-XS, http://search.cpan.org/dist/JSON-XS/XS.pm), make sure it's available or the plugin will not work.
+The plugin uses the perl JSON::XS module (``perl-JSON-XS`` rpm package, http://search.cpan.org/dist/JSON-XS/XS.pm), make sure it's available or the plugin will not work.
 
 
 Preparation
@@ -160,7 +160,10 @@ Different settings:
   	Tungsten Replicator and binlog_format=MIXED.
 
 
-.. warn:: The ``binlog_format`` can be overriden on a per session basis, make sure that this does NOT happen when using ``pt-online-schema-change``.
+Be Warned
+"""""""""
+
+The ``binlog_format`` can be overriden on a per session basis, make sure that this does NOT happen when using ``pt-online-schema-change``.
 
 
 Summary
@@ -168,7 +171,7 @@ Summary
 
 The documentation on the Continuent website already mentions how you can compare data with ``pt-table-checksum`` (https://docs.continuent.com/tungsten-replicator-3.0/troubleshooting-datacompare.html).
 
-I believe this plugin is a good addition to it. The features in Percona Toolkit that monitor replication lag can now be used with Tungsten Replicator, and therefore gives you control on how much replication lag is tolerated while using those tools.
+I believe this plugin is a good addition to it. The features in Percona Toolkit that monitor replication lag can now be used with Tungsten Replicator  and therefore gives you control on how much replication lag is tolerated while using those tools.
 
 
 
